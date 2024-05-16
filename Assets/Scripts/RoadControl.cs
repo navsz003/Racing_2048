@@ -3,43 +3,33 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class RoadControl : MonoBehaviour
+namespace Racing
 {
-    private Animator ani;
-    private float track = 0f;
 
-    // Start is called before the first frame update
-    void Start()
+    public class RoadControl : MonoBehaviour
     {
-        ani = GetComponent<Animator>();
-    }
+        private Animator ani;
+        public static float track = 0f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        float turn = Input.GetAxisRaw("Horizontal");
-
-        switch (turn)
+        // Start is called before the first frame update
+        void Start()
         {
-            case 0:
-                break;
-            case 1:
-                if (track != 1) {
-                    track++;
-                    ani.SetFloat("Horizontal", track);
-                    Thread.Sleep(50);
-                }
-                break;
-            case -1:
-                if (track != -1)
-                {
-                    track--;
-                    ani.SetFloat("Horizontal", track);
-                    Thread.Sleep(50);
-                }
-                break;
-            default:
-                break;
+            ani = GetComponent<Animator>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A) && track != -1)
+            {
+                track--;
+                ani.SetFloat("Horizontal", track);
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && track != 1)
+            {
+                track++;
+                ani.SetFloat("Horizontal", track);
+            }
         }
     }
 }

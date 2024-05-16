@@ -2,27 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContachControl : MonoBehaviour
+namespace Racing
 {
 
-    private Animator ani;
-    private Rigidbody2D rBody;
-
-    void Start()
+    public class ContachControl : MonoBehaviour
     {
-        ani = GetComponent<Animator>();
-        rBody = GetComponent<Rigidbody2D>();
-    }
 
-    void Update()
-    {
-        float horizontal = Input.GetAxisRaw("Horizontal");
+        private Animator ani;
+        private Rigidbody2D rBody;
+        private float track = RoadControl.track;
 
-        ani.SetFloat("Horizontal", horizontal);
-        
+        void Start()
+        {
+            ani = GetComponent<Animator>();
+            rBody = GetComponent<Rigidbody2D>();
+        }
+
+        void Update()
+        {
+            //float horizontal = Input.GetAxisRaw("Horizontal");
+
+            if (Input.GetKeyDown(KeyCode.A) && track != -1)
+            {
+                track--;
+                ani.SetFloat("Horizontal", -1);
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && track != 1)
+            {
+                track++;
+                ani.SetFloat("Horizontal", 1);
+            }
+            else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                ani.SetFloat("Horizontal", 0);
+            }
+            else
+            {
+
+            }
+
+
+        }
     }
 }
-
 /*
                      _ooOoo_
                     o8888888o
