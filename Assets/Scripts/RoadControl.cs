@@ -17,29 +17,15 @@ public class RoadControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float turn = Input.GetAxisRaw("Horizontal");
-
-        switch (turn)
+        if (Input.GetKeyDown(KeyCode.A) && track != -1)
         {
-            case 0:
-                break;
-            case 1:
-                if (track != 1) {
-                    track++;
-                    ani.SetFloat("Horizontal", track);
-                    Thread.Sleep(50);
-                }
-                break;
-            case -1:
-                if (track != -1)
-                {
-                    track--;
-                    ani.SetFloat("Horizontal", track);
-                    Thread.Sleep(50);
-                }
-                break;
-            default:
-                break;
+            track--;
+            ani.SetFloat("Horizontal", track);
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && track != 1)
+        {
+            track++;
+            ani.SetFloat("Horizontal", track);
         }
     }
 }
