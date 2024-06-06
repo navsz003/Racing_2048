@@ -12,6 +12,7 @@ namespace Racing
         private DateTime startT = DateTime.Now;
         private DateTime nowT = DateTime.Now;
         TimeSpan lifeT = RacingConstant.lifeT;
+        private float ySpeed = -1f;
         
         // Start is called before the first frame update
         void Start()
@@ -23,7 +24,8 @@ namespace Racing
         void Update()
         {
             // Í¼Æ¬ÒÆ¶¯
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, ySpeed);
+            ySpeed -= 0.02f;
 
             // Í¼Æ¬·Å´ó
             transform.localScale += addSize;
