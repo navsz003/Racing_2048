@@ -64,7 +64,7 @@ public class Number : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, GetLocalPos(), t);
-            t += 0.01f;
+            t += 0.08f;
             yield return new WaitForEndOfFrame();
         }
         // 移动结束的回调
@@ -263,7 +263,7 @@ public class Number : MonoBehaviour
             value = Manager._isnstance.numbers[posX, posY].value;
             Manager._isnstance.numbers[posX, posY].GetComponent<Image>().sprite = LoadSprite();
             //游戏成功
-            if (value == 4096)
+            if (value == 131072)
             {
                 Manager._isnstance.ShowUIFinsh(true);
             }

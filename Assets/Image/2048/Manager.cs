@@ -28,7 +28,7 @@ public class Manager : MonoBehaviour
         // 开始游戏
         ReStartBtn();
         // 游戏结束面板按钮监听，重新开始
-        UIFinsh.GetComponentInChildren<Button>().onClick.AddListener(ReStartBtn);
+       // UIFinsh.GetComponentInChildren<Button>().onClick.AddListener(ReStartBtn);
     }
 
     // 重新开始
@@ -247,11 +247,11 @@ public class Manager : MonoBehaviour
         UIFinsh.SetActive(true);
         if (isSuccess)
         {
-            UIFinsh.GetComponentInChildren<Text>().text = "Success";
+            ReStartBtn();
         }
         else
         {
-            UIFinsh.GetComponentInChildren<Text>().text = "NOSuccess";
+            ReStartBtn();
         }
     }
 }
