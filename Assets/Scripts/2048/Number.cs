@@ -11,9 +11,9 @@ public class Number : MonoBehaviour
     public int posX;
     public int posY;
 
-    private float offsetX = -298.25f;      //显示偏移X
-    private float offsetY = -296.25f;      //显示偏移Y
-    private float space = 197.5F;         // 间距
+    private float offsetX = -51.5f;      //显示偏移X
+    private float offsetY = -51.5f;      //显示偏移Y
+    private float space = 33;         // 间距
 
     private bool isMoving = false;   //动画是否播放过的计数
     public int value;                //产生数字是几
