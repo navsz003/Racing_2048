@@ -13,16 +13,18 @@ namespace Racing
 
         private DateTime startT;
         private DateTime nowT;
-        TimeSpan lifeT;
+        private TimeSpan lifeT;
 
         private float xSpeed;
         private float ySpeed;
-        Vector3 addSize;
+        private Vector3 addSize;
+
+        private Renderer bRender;
 
         // Start is called before the first frame update
         void Start()
         {
-            initVar();
+            InitVar();
         }
 
         // Update is called once per frame
@@ -38,31 +40,33 @@ namespace Racing
             // 定时消除对象
             nowT = DateTime.Now;
             if (nowT - startT >= lifeT)
-            {
-                GameObject.Destroy(gameObject);
-                //ResetObj();
-            }
+                ResetObj();
+            
         }
 
-        private void initVar()
+        private void InitVar()
         {
             startPosition = transform.position;
             startScale = transform.localScale;
+
+            xSpeed = 0f;
+            ySpeed = RacingConstant.intiYSpeed;
+            addSize = RacingConstant.addSize;
 
             startT = DateTime.Now;
             nowT = DateTime.Now;
             lifeT = RacingConstant.lifeT;
 
-            xSpeed = 0f;
-            ySpeed = RacingConstant.intiYSpeed;
-            addSize = RacingConstant.addSize;
+            bRender = GetComponent<Renderer>();
         }
 
-        // TODO
         private void ResetObj()
         {
             transform.position = startPosition;
             transform.localScale = startScale;
+
+            xSpeed = 0f;
+            ySpeed = RacingConstant.intiYSpeed;
 
             startT = DateTime.Now;
             nowT = DateTime.Now;

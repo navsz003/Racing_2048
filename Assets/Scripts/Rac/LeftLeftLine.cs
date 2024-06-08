@@ -14,21 +14,27 @@ namespace Racing
 
         private DateTime startT = DateTime.Now;
         private DateTime nowT = DateTime.Now;
-        TimeSpan lifeT = RacingConstant.lifeT;
+        private TimeSpan lifeT = RacingConstant.lifeT;
 
         private float xSpeed = -RacingConstant.initXSpeed2;
         private float ySpeed = RacingConstant.intiYSpeed;
-        Vector3 addSize = RacingConstant.addSize;
+        private Vector3 addSize = RacingConstant.addSize;
+
+        private Renderer bRenderer;
 
         // Start is called before the first frame update
         void Start()
         {
-            initVar();
+            InitVar();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if(RoadControl.track > 0)
+                bRenderer.enabled = true;
+            else
+                bRenderer.enabled = false;
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, ySpeed);
             xSpeed -= RacingConstant.addX2;
@@ -38,13 +44,10 @@ namespace Racing
 
             nowT = DateTime.Now;
             if (nowT - startT >= lifeT)
-            {
-                GameObject.Destroy(gameObject);
-                // 改为重置到开始位置
-            }
+                ResetObj();
         }
 
-        private void initVar()
+        private void InitVar()
         {
             startPosition = transform.position;
             startScale = transform.localScale;
@@ -56,6 +59,19 @@ namespace Racing
             xSpeed = -RacingConstant.initXSpeed2;
             ySpeed = RacingConstant.intiYSpeed;
             addSize = RacingConstant.addSize;
+
+            bRenderer = GetComponent<Renderer>();
+        }
+        private void ResetObj()
+        {
+            transform.position = startPosition;
+            transform.localScale = startScale;
+
+            xSpeed = -RacingConstant.initXSpeed2;
+            ySpeed = RacingConstant.intiYSpeed;
+
+            startT = DateTime.Now;
+            nowT = DateTime.Now;
         }
     }
 }
