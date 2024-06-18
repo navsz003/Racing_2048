@@ -30,7 +30,8 @@ namespace Racing
         // Update is called once per frame
         void Update()
         {
-            if (RoadControl.track > -1)
+            // 控制路障是否显示，是否碰撞
+            if (RoadControl.track > -1 && RoadControl.bPos-RoadControl.track == -1)
                 bRenderer.enabled = true;
             else
                 bRenderer.enabled = false;

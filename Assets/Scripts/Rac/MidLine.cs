@@ -19,7 +19,7 @@ namespace Racing
         private float ySpeed;
         private Vector3 addSize;
 
-        private Renderer bRender;
+        private Renderer bRenderer;
 
         // Start is called before the first frame update
         void Start()
@@ -30,6 +30,12 @@ namespace Racing
         // Update is called once per frame
         void Update()
         {
+            // 控制路障是否显示，是否碰撞
+            if (RoadControl.bPos - RoadControl.track == 0)
+                bRenderer.enabled = true;
+            else
+                bRenderer.enabled = false;
+
             // 图片移动
             GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, ySpeed);
             ySpeed *= RacingConstant.mutiY1;
@@ -37,11 +43,10 @@ namespace Racing
             // 图片放大
             transform.localScale += addSize;
 
-            // 定时消除对象
+            // 定时重置对象
             nowT = DateTime.Now;
             if (nowT - startT >= lifeT)
                 ResetObj();
-            
         }
 
         private void InitVar()
@@ -57,7 +62,7 @@ namespace Racing
             nowT = DateTime.Now;
             lifeT = RacingConstant.lifeT;
 
-            bRender = GetComponent<Renderer>();
+            bRenderer = GetComponent<Renderer>();
         }
 
         private void ResetObj()

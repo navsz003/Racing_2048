@@ -12,13 +12,15 @@ namespace Racing
         private Vector2 startPosition;
         private Vector2 startScale;
 
-        private DateTime startT = DateTime.Now;
-        private DateTime nowT = DateTime.Now;
-        private TimeSpan lifeT = RacingConstant.lifeT;
+        private int bPos;
 
-        private float xSpeed = RacingConstant.initXSpeed1;
-        private float ySpeed = RacingConstant.intiYSpeed;
-        private Vector3 addSize = RacingConstant.addSize;
+        private DateTime startT;
+        private DateTime nowT;
+        private TimeSpan lifeT;
+
+        private float xSpeed;
+        private float ySpeed;
+        private Vector3 addSize;
 
         private Renderer bRenderer;
 
@@ -31,7 +33,8 @@ namespace Racing
         // Update is called once per frame
         void Update()
         {
-            if (RoadControl.track < 1)
+            // 控制路障是否显示，是否碰撞
+            if (RoadControl.track < 1 && RoadControl.bPos-RoadControl.track == 1)
                 bRenderer.enabled = true;
             else
                 bRenderer.enabled = false;
@@ -51,6 +54,8 @@ namespace Racing
         {
             startPosition = transform.position;
             startScale = transform.localScale;
+
+            bPos = RacingConstant.bPos;
 
             xSpeed = RacingConstant.initXSpeed1;
             ySpeed = RacingConstant.intiYSpeed;
